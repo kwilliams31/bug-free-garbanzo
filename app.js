@@ -19,10 +19,13 @@ app.get('/',  (req, res) => {
 })
 
 
-app.get('/gmail', (req, res) => {
+app.post('/gmail', (req, res) => {
 
     var transporter = nodemailer.createTransport({
-      service: 'gmail',
+    service: 'gmail',
+    //host: 'smtp.gmail.com',
+    //port: 465,
+    //secure: true, // use SSL
       auth: {
         user: 'krisew10@gmail.com',
         pass: process.env.APP_PWD
@@ -31,9 +34,9 @@ app.get('/gmail', (req, res) => {
   
     var mailOptions = {
       from: 'krisew10@gmail.com',
-      to: 'krisew10@gmail.com',
+      to: '3344059509@vtext.com',
       subject: 'Sending Email using Node.js',
-      text: 'That was easy!'
+      text: 'Secret 1: You can park anywhere after 4:30 pm; Secret 2:'
     };
   
     transporter.sendMail(mailOptions, function(error, info){
@@ -43,7 +46,7 @@ app.get('/gmail', (req, res) => {
         console.log('Email sent: ' + info.response);
       }
     });
-    
+
     res.redirect('/');
   
   })
